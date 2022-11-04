@@ -37,6 +37,7 @@
   "module": "./dist/react-butterfly-dag.es.js",
   "types": "./dist/index.d.ts",
   "devDependencies": {
+    "@types/jquery": "^3.5.14",
     "@types/node": "^18.7.6",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
@@ -52,6 +53,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "husky": "^8.0.1",
+    "jquery": "^3.6.1",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
     "react": "^18.2.0",
@@ -76,5 +78,8 @@
     "url": "https://github.com/pedroscosta/react-butterfly-dag/issues"
   },
   "homepage": "https://github.com/pedroscosta/react-butterfly-dag#readme",
-  "license": "GPL-3.0"
+  "license": "GPL-3.0",
+  "dependencies": {
+    "butterfly-dag": "^4.3.13"
+  }
 }

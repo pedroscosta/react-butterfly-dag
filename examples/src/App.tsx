@@ -1,34 +1,56 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import './App.css';
+
+import {ButterflyDag} from '../../src/index';
+
+const TestNode = () => {
+    return (
+        <div style={{width: '100px', height: '100px', background: 'red', color: 'white'}}>
+            <div
+                className="react-butterfly-dag-endpoint"
+                id="1"
+                style={{width: '10px', height: '10px', background: 'blue'}}
+                {...{type: 'source'}}
+            ></div>
+            <p>Test Node 2</p>
+            <div
+                className="react-butterfly-dag-endpoint"
+                id="2"
+                style={{width: '10px', height: '10px', background: 'blue'}}
+                {...{type: 'target'}}
+            ></div>
+        </div>
+    );
+};
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+    return (
+        <div className="App">
+            <ButterflyDag
+                canvasProps={{
+                    disLinkable: true,
+                    linkable: true,
+                    draggable: true,
+                    zoomable: true,
+                    moveable: true,
+                    theme: {
+                        edge: {
+                            shapeType: 'AdvancedBezier',
+                        },
+                    },
+                }}
+                initialData={{
+                    nodes: [
+                        {
+                            id: 'test-1',
+                            type: TestNode,
+                            left: 50,
+                            top: 50,
+                        },
+                    ],
+                }}
+            />
+        </div>
+    );
 }
 
-export default App
+export default App;
