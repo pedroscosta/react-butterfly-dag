@@ -1,0 +1,7 @@
+.butterfly-wrapper {
+    position: absolute;
+}
+
+.butterfly-selected-canvas {
+    display: none;
+}

@@ -1,8 +1,11 @@
 import './App.css';
 
+import {ElementRef, useRef, useState} from 'react';
+import ReactJson from 'react-json-view';
+import {ReactNodeData} from '../../src/components/types';
 import {ButterflyDag} from '../../src/index';
 
-const TestNode = () => {
+const TestNode = ({data}: {data: any}) => {
     return (
         <div style={{width: '100px', height: '100px', background: 'red', color: 'white'}}>
             <div
@@ -12,6 +15,7 @@ const TestNode = () => {
                 {...{type: 'source'}}
             ></div>
             <p>Test Node 2</p>
+            {data.name}
             <div
                 className="react-butterfly-dag-endpoint"
                 id="2"
@@ -23,34 +27,70 @@ const TestNode = () => {
 };
 
 function App() {
+    const ref = useRef<ElementRef<typeof ButterflyDag>>(null);
+
+    const [nodes, setNodes] = useState<ReactNodeData[]>([
+        {
+            id: 'test-1',
+            type: TestNode,
+            left: 50,
+            top: 50,
+            data: {
+                name: 'test 1',
+            },
+        },
+    ]);
+
+    const canvasState = {nodes};
+
     return (
         <div className="App">
-            <ButterflyDag
-                canvasProps={{
-                    disLinkable: true,
-                    linkable: true,
-                    draggable: true,
-                    zoomable: true,
-                    moveable: true,
-                    theme: {
-                        edge: {
-                            shapeType: 'AdvancedBezier',
+            <div style={{flex: '1 1 auto', maxHeight: '75vh', position: 'relative'}}>
+                <ButterflyDag
+                    canvasProps={{
+                        disLinkable: true,
+                        linkable: true,
+                        draggable: true,
+                        zoomable: true,
+                        moveable: true,
+                        theme: {
+                            edge: {
+                                shapeType: 'AdvancedBezier',
+                            },
                         },
-                    },
-                }}
-                initialData={{
-                    nodes: [
-                        {
-                            id: 'test-1',
-                            type: TestNode,
-                            left: 50,
-                            top: 50,
-                        },
-                    ],
-                }}
-            />
+                    }}
+                    data={{
+                        nodes,
+                    }}
+                    ref={ref}
+                    onStateChange={(state) => setNodes(() => state.nodes)}
+                />
+            </div>
+            <div style={{minHeight: '25vh', maxHeight: '25vh'}}>
+                <button
+                    onClick={() => {
+                        setNodes((prev) => [
+                            ...prev,
+                            {
+                                id: 'test' + (prev.length + 1).toString(),
+                                type: TestNode,
+                                left: 50,
+                                top: 50,
+                                data: {
+                                    name: 'test ' + (prev.length + 1).toString(),
+                                },
+                            },
+                        ]);
+                    }}
+                >
+                    Add Node
+                </button>
+                <ReactJson src={canvasState} />
+            </div>
         </div>
     );
 }
+
+App.whyDidYouRender = true;
 
 export default App;

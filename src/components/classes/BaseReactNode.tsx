@@ -1,13 +1,15 @@
 import {Endpoint, Node} from 'butterfly-dag';
 
 import $ from 'jquery';
-import {render} from 'react-dom';
+import {ReactDagData} from '../types';
 
 export default class BaseReactNode extends Node {
     public dom: any; // Just to stop TS from complaining about this.dom not existing, although it would't raise an error.
+    public reactOpts: ReactDagData;
 
     constructor(opts: any) {
         super(opts);
+        this.reactOpts = opts;
     }
 
     draw = (props: any) => {
@@ -18,7 +20,7 @@ export default class BaseReactNode extends Node {
             .css('left', props.left + 'px')
             .attr('id', props.id);
 
-        render(options.type(options.data), container[0]);
+        // render(options.type(options.data), container[0]);
 
         return container[0];
     };
@@ -27,7 +29,6 @@ export default class BaseReactNode extends Node {
         const endPointElements = $(this.dom).find('.react-butterfly-dag-endpoint').toArray();
 
         endPointElements.forEach((item) => {
-            console.log(this);
             this.addEndpoint({
                 id: item.id,
                 type: item.attributes.getNamedItem('type')?.value,

@@ -1,6 +1,6 @@
 export interface ReactNodeData {
     id: string;
-    type: () => JSX.Element;
+    type: (props: {data: any}) => JSX.Element;
     left: number;
     top: number;
 
