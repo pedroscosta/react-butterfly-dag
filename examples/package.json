@@ -14,10 +14,12 @@
     "react-json-view": "^1.21.3"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.189",
     "@types/react": "^18.0.22",
     "@types/react-dom": "^18.0.7",
     "@vitejs/plugin-react": "^2.2.0",
     "@welldone-software/why-did-you-render": "^7.0.1",
+    "lodash": "^4.17.21",
     "typescript": "^4.6.4",
     "vite": "^3.2.0"
   }

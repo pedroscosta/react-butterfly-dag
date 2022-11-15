@@ -1,9 +1,21 @@
-import {forwardRef, memo, useEffect, useImperativeHandle, useMemo, useReducer, useRef} from 'react';
+import {
+    ElementRef,
+    forwardRef,
+    memo,
+    ReactNode,
+    useEffect,
+    useImperativeHandle,
+    useMemo,
+    useReducer,
+    useRef,
+} from 'react';
 import {createPortal} from 'react-dom';
 import BaseReactCanvas from './classes/BaseReactCanvas';
 import BaseReactNode from './classes/BaseReactNode';
-import {CanvasProps, ReactDagData, ReactNodeData} from './types';
+import {CanvasMoveData, CanvasProps, ReactDagData, ReactNodeData} from './types';
 
+import {ButterflyDagContextProvider} from '../contexts/ButterflyDagContext';
+import ContextUpdater from './ContextUpdater';
 import './dag.css';
 
 const _transformReactToCanvasData: any = (data: ReactDagData) => {
@@ -37,6 +49,8 @@ export interface ButterflyDagProps {
     canvasProps?: CanvasProps;
     onStateChange?: (state: any) => void;
     onInternalStateChange?: (state: any) => void;
+    onCanvasMove?: (data: CanvasMoveData) => void;
+    children?: ReactNode;
 }
 
 export interface ButterflyDagHandle {
@@ -53,13 +67,16 @@ export const ButterflyDag = memo(
                 canvasProps = {},
                 onStateChange,
                 onInternalStateChange,
+                children,
+                ...props
             },
             ref,
         ) => {
             const forceUpdate = useReducer((x) => x + 1, 0)[1]; // Workaround for functional components not having a forceUpdate
 
             const root = useRef<HTMLDivElement>(null);
-            const canvas = useRef<any>(null);
+            const canvas = useRef<BaseReactCanvas | null>(null);
+            const contextUpdater = useRef<ElementRef<typeof ContextUpdater>>(null);
 
             const canvasData = useMemo(() => transformReactToCanvasData(data), [data]);
 
@@ -67,11 +84,11 @@ export const ButterflyDag = memo(
                 if (canvas.current) updateCanvas(true);
             }, [data]);
 
-            const updateCanvas = async (shoudForceUpdate = false) => {
+            const updateCanvas = async (shoudForceUpdate = false, time = 500) => {
                 await new Promise<void>((res, rej) => {
                     try {
-                        canvas.current.redraw(canvasData, () => {
-                            canvas.current.focusCenterWithAnimate();
+                        canvas.current?.redraw(canvasData, () => {
+                            canvas.current?.focusCenterWithAnimate(undefined, undefined, time);
                             res();
                         });
                     } catch (e) {
@@ -98,10 +115,14 @@ export const ButterflyDag = memo(
 
                             if (onInternalStateChange) onInternalStateChange(newState);
                         },
+                        onCanvasMove: (data: CanvasMoveData) => {
+                            contextUpdater.current?.onCanvasMove(data);
+                            if (props.onCanvasMove) props.onCanvasMove(data);
+                        },
                         root: root.current,
                     });
 
-                updateCanvas(true);
+                updateCanvas(true, 0);
             }, []);
 
             return (
@@ -117,7 +138,12 @@ export const ButterflyDag = memo(
                             })}
                         </>
                     )}
-                    <div ref={root} style={{width: '100%', height: '100%'}}></div>
+                    <div ref={root} style={{width: '100%', height: '100%'}}>
+                        <ButterflyDagContextProvider>
+                            <ContextUpdater ref={contextUpdater} />
+                            {children}
+                        </ButterflyDagContextProvider>
+                    </div>
                 </>
             );
         },

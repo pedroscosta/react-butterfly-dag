@@ -66,3 +66,9 @@ export interface CanvasProps {
         autoResizeRootSize?: boolean;
     };
 }
+
+export interface CanvasMoveData {
+    position: [number, number];
+    zoom: number;
+    realPosition: [number, number];
+}

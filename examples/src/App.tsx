@@ -3,7 +3,8 @@ import './App.css';
 import {ElementRef, useRef, useState} from 'react';
 import ReactJson from 'react-json-view';
 import {ReactNodeData} from '../../src/components/types';
-import {ButterflyDag} from '../../src/index';
+import {Background, ButterflyDag} from '../../src/index';
+import Node from './components/Node';
 
 const TestNode = ({data}: {data: any}) => {
     return (
@@ -31,12 +32,13 @@ function App() {
 
     const [nodes, setNodes] = useState<ReactNodeData[]>([
         {
-            id: 'test-1',
-            type: TestNode,
+            id: 'books',
+            type: Node,
             left: 50,
             top: 50,
             data: {
-                name: 'test 1',
+                title: 'Books',
+                fields: ['id', 'name', 'author-id'],
             },
         },
     ]);
@@ -64,7 +66,9 @@ function App() {
                     }}
                     ref={ref}
                     onStateChange={(state) => setNodes(() => state.nodes)}
-                />
+                >
+                    <Background />
+                </ButterflyDag>
             </div>
             <div style={{minHeight: '25vh', maxHeight: '25vh'}}>
                 <button
