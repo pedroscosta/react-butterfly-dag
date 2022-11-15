@@ -9,7 +9,6 @@ import {
     useReducer,
     useRef,
 } from 'react';
-import {createPortal} from 'react-dom';
 import BaseReactCanvas from './classes/BaseReactCanvas';
 import BaseReactNode from './classes/BaseReactNode';
 import {CanvasMoveData, CanvasProps, ReactDagData, ReactNodeData} from './types';
@@ -127,17 +126,6 @@ export const ButterflyDag = memo(
 
             return (
                 <>
-                    {canvas.current && (
-                        <>
-                            {data.nodes.map((node) => {
-                                const dom = root.current?.querySelector(`#${node.id}`);
-
-                                if (!dom) return;
-
-                                return createPortal(node.type({data: node.data}), dom);
-                            })}
-                        </>
-                    )}
                     <div ref={root} style={{width: '100%', height: '100%'}}>
                         <ButterflyDagContextProvider>
                             <ContextUpdater ref={contextUpdater} />

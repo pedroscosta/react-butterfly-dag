@@ -1,6 +1,8 @@
 import {Endpoint, Node} from 'butterfly-dag';
 
 import $ from 'jquery';
+import {flushSync} from 'react-dom';
+import {createRoot} from 'react-dom/client';
 import {ReactDagData} from '../types';
 
 export default class BaseReactNode extends Node {
@@ -20,7 +22,11 @@ export default class BaseReactNode extends Node {
             .css('left', props.left + 'px')
             .attr('id', props.id);
 
-        // render(options.type(options.data), container[0]);
+        const root = createRoot(container[0]);
+
+        flushSync(() => {
+            root.render(options.type({data: options.data}));
+        });
 
         return container[0];
     };
@@ -29,12 +35,22 @@ export default class BaseReactNode extends Node {
         const endPointElements = $(this.dom).find('.react-butterfly-dag-endpoint').toArray();
 
         endPointElements.forEach((item) => {
+            console.log({
+                id: item.id,
+                type: item.attributes.getNamedItem('type')?.value,
+                dom: item,
+                Class: Endpoint,
+                linkable: true,
+            });
             this.addEndpoint({
                 id: item.id,
                 type: item.attributes.getNamedItem('type')?.value,
                 dom: item,
                 Class: Endpoint,
+                linkable: true,
             });
         });
+
+        console.log(this.endpoints);
     }
 }

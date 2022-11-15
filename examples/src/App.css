@@ -16,3 +16,8 @@ body {
     display: flex;
     flex: 1 1 auto;
 }
+
+.butterflies-link {
+    stroke: #000;
+    stroke-width: 1px;
+}

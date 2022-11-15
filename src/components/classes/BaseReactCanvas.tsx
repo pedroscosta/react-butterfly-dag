@@ -34,6 +34,7 @@ export default class BaseReactCanvas extends Canvas {
 
         if (opts.onStateChange) {
             this.on('events', (data: any) => {
+                console.log(data);
                 // This doesn't seem to be the right way to do this, if you know to this better, please on a PR.
                 if (
                     data.type &&

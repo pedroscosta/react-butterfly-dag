@@ -13,3 +13,15 @@
     width: 100%;
     height: 100%;
 }
+
+.butterflies-link {
+    stroke: #000;
+    stroke-width: 1px;
+    fill: none;
+}
+
+.butterfly-svg {
+    position: absolute !important;
+    pointer-events: auto !important;
+    overflow: visible !important;
+}
