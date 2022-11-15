@@ -2,7 +2,6 @@ import {Endpoint} from '../../../src/index';
 import './Node.css';
 
 const Node = ({data: {title, fields}}: {data: any}) => {
-    console.log('node mounted');
     return (
         <div className="table-node-root">
             <div className="table-node-header">{title}</div>

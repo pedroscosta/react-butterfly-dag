@@ -168,11 +168,8 @@ export const ButterflyDag = memo(
                 delete nextNode.draggable;
             }
 
-            if (JSON.stringify(nextNode) != JSON.stringify(prevNode))
-                console.log('props change', JSON.stringify(nextNode), JSON.stringify(prevNode));
             if (JSON.stringify(nextNode) !== JSON.stringify(prevNode)) return false;
         }
-        // console.log('props change', prev, next);
         return true;
     },
 );
