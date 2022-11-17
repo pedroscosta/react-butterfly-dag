@@ -67,6 +67,21 @@ export interface CanvasProps {
     };
 }
 
+export interface EndpointProps {
+    scope?: string;
+    disLinkable?: boolean;
+    linkable?: boolean;
+    expandArea?:
+        | {
+              left?: number;
+              right?: number;
+              top?: number;
+              bottom?: number;
+          }
+        | number;
+    limitNum?: boolean;
+}
+
 export interface CanvasMoveData {
     position: [number, number];
     zoom: number;

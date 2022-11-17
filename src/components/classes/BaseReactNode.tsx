@@ -1,9 +1,15 @@
 import {Endpoint, Node} from 'butterfly-dag';
 
 import $ from 'jquery';
+import React from 'react';
 import {flushSync} from 'react-dom';
 import {createRoot} from 'react-dom/client';
 import {ReactDagData} from '../types';
+
+declare class Node {
+    constructor(opts: any);
+    addEndpoint: (data: any) => void;
+}
 
 export default class BaseReactNode extends Node {
     public dom: any; // Just to stop TS from complaining about this.dom not existing, although it would't raise an error.
@@ -35,22 +41,14 @@ export default class BaseReactNode extends Node {
         const endPointElements = $(this.dom).find('.react-butterfly-dag-endpoint').toArray();
 
         endPointElements.forEach((item) => {
-            console.log({
-                id: item.id,
-                type: item.attributes.getNamedItem('type')?.value,
-                dom: item,
-                Class: Endpoint,
-                linkable: true,
-            });
+            const props = JSON.parse(item.attributes.getNamedItem('endpoint-props')?.value || '{}');
             this.addEndpoint({
                 id: item.id,
                 type: item.attributes.getNamedItem('type')?.value,
                 dom: item,
                 Class: Endpoint,
-                linkable: true,
+                ...props,
             });
         });
-
-        console.log(this.endpoints);
     }
 }

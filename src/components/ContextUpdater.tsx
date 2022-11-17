@@ -1,5 +1,5 @@
-import {forwardRef, useContext, useImperativeHandle} from 'react';
-import ButterflyDagContext from '../contexts/ButterflyDagContext';
+import React, {forwardRef, useContext, useImperativeHandle} from 'react';
+import ButterflyDagContext from './contexts/ButterflyDagContext';
 import {CanvasMoveData} from './types';
 
 interface ContextUpdaterHandle {

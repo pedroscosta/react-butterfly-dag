@@ -1,11 +1,11 @@
-import {StyleHTMLAttributes, useContext} from 'react';
-import ButterflyDagContext from '../contexts/ButterflyDagContext';
+import React, {useContext} from 'react';
+import ButterflyDagContext from './contexts/ButterflyDagContext';
 
 interface BackgroundProps {
     type: 'line' | 'circle';
     size?: number;
     spacing?: number;
-    style?: StyleHTMLAttributes<HTMLDivElement>;
+    style?: React.CSSProperties;
 }
 
 export const Background = ({size = 1, spacing = 40, ...grid}: BackgroundProps) => {

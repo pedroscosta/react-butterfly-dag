@@ -1,4 +1,4 @@
-import {
+import React, {
     ElementRef,
     forwardRef,
     memo,
@@ -13,7 +13,7 @@ import BaseReactCanvas from './classes/BaseReactCanvas';
 import BaseReactNode from './classes/BaseReactNode';
 import {CanvasMoveData, CanvasProps, ReactDagData, ReactNodeData} from './types';
 
-import {ButterflyDagContextProvider} from '../contexts/ButterflyDagContext';
+import {ButterflyDagContextProvider} from './contexts/ButterflyDagContext';
 import ContextUpdater from './ContextUpdater';
 import './dag.css';
 

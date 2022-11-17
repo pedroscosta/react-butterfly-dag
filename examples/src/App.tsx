@@ -2,8 +2,7 @@ import './App.css';
 
 import {ElementRef, useRef, useState} from 'react';
 import ReactJson from 'react-json-view';
-import {ReactNodeData} from '../../src/components/types';
-import {Background, ButterflyDag} from '../../src/index';
+import {Background, ButterflyDag, ReactNodeData} from 'react-butterfly-dag';
 import Node from './components/Node';
 
 const TestNode = ({data}: {data: any}) => {
@@ -67,7 +66,7 @@ function App() {
                     ref={ref}
                     onStateChange={(state) => setNodes(() => state.nodes)}
                 >
-                    <Background />
+                    <Background type="line" />
                 </ButterflyDag>
             </div>
             <div style={{minHeight: '25vh', maxHeight: '25vh'}}>

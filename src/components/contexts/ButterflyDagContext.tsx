@@ -1,5 +1,5 @@
-import {createContext, ReactNode, useState} from 'react';
-import {CanvasMoveData} from '../components/types';
+import React, {createContext, ReactNode, useState} from 'react';
+import {CanvasMoveData} from '../types';
 
 interface ButterflyDagContextType extends CanvasMoveData {
     onCanvasMove: (data: any) => void;

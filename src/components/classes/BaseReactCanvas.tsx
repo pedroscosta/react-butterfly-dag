@@ -1,6 +1,7 @@
 import {Canvas} from 'butterfly-dag';
 import $ from 'jquery';
 import _ from 'lodash';
+import React from 'react';
 
 declare class Canvas {
     constructor(opts: any);

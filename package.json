@@ -29,11 +29,11 @@
     "exports": {
         ".": {
             "import": "./dist/react-butterfly-dag.es.js",
-            "require": "./dist/react-butterfly-dag.umd.js"
+            "require": "./dist/react-butterfly-dag.cjs.js"
         },
         "./dist/style.css": "./dist/style.css"
     },
-    "main": "./dist/react-butterfly-dag.umd.js",
+    "main": "./dist/react-butterfly-dag.cjs.js",
     "module": "./dist/react-butterfly-dag.es.js",
     "types": "./dist/index.d.ts",
     "devDependencies": {
@@ -54,7 +54,6 @@
         "eslint-plugin-react-hooks": "^4.6.0",
         "eslint-plugin-simple-import-sort": "^7.0.0",
         "husky": "^8.0.1",
-        "jquery": "^3.6.1",
         "lint-staged": "^13.0.3",
         "prettier": "^2.7.1",
         "react": "^18.2.0",
@@ -63,11 +62,15 @@
         "vite": "^3.1.0",
         "vite-plugin-dts": "^1.4.1",
         "vite-plugin-linter": "^1.2.0",
-        "vite-tsconfig-paths": "^3.5.0"
+        "vite-tsconfig-paths": "^3.5.0",
+        "butterfly-dag": "^4.3.13",
+        "jquery": "^3.6.1",
+        "lodash": "^4.17.21"
     },
     "peerDependencies": {
-        "react": "16.8.0 || >=17.x",
-        "react-dom": "16.8.0 || >=17.x"
+        "butterfly-dag": "^4.3.13",
+        "jquery": "^3.6.1",
+        "lodash": "^4.17.21"
     },
     "repository": {
         "type": "git",
@@ -81,6 +84,10 @@
     "homepage": "https://github.com/pedroscosta/react-butterfly-dag#readme",
     "license": "GPL-3.0",
     "dependencies": {
-        "butterfly-dag": "^4.3.13"
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0"
+    },
+    "resolutions": {
+        "rollup": "2.74.1"
     }
 }
