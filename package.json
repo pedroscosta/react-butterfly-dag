@@ -28,8 +28,8 @@
     ],
     "exports": {
         ".": {
-            "import": "./dist/react-butterfly-dag.es.js",
-            "require": "./dist/react-butterfly-dag.cjs.js"
+            "import": "./dist/react-butterfly-dag.js",
+            "require": "./dist/react-butterfly-dag.cjs"
         },
         "./dist/style.css": "./dist/style.css"
     },

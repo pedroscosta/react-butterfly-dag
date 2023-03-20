@@ -25,7 +25,7 @@ export default defineConfig((configEnv) => ({
             entry: resolve('src', 'components/index.ts'),
             name: 'react-butterfly-dag',
             formats: ['es', 'cjs'],
-            fileName: (format) => `react-butterfly-dag.${format}.js`,
+            fileName: `react-butterfly-dag.js`,
         },
         rollupOptions: {
             external: [
